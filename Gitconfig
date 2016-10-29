@@ -1,0 +1,30 @@
+[user]
+	email = tjovanovic994@gmail.com
+	name = Tomislav Jovanovic
+[push]
+	default = simple
+
+[alias]
+	s = status -s
+
+	rv = remote -v
+	
+	b = branch
+	co = checkout
+	cob = checkout -b
+
+	a = add
+	c = commit
+	pl = pull
+	ps = push
+
+
+	lg = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset) %C(bold cyan)(committed: %cD)%C(reset) %C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset)%n''          %C(dim white)- %an <%ae> %C(reset) %C(dim white)(committer: %cn <%ce>)%C(reset)'
+	
+	ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+
+        hidden = !git ls-files -v | grep "^[[:lower:]]"
+[core]
+	excludesfile = /home/tomislavj/.gitignore_global
+[pull]
+	rebase = true
