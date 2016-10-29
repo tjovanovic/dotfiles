@@ -91,3 +91,6 @@ alias xclip="xclip -selection c"
 alias zshconfig="vim ~/.zshrc"
 alias gitconfig="vim ~/.gitconfig"
 alias xmonadconfig="vim ~/.xmonad/xmonad.hs"
+
+alias sshclip="cat ~/.ssh/id_rsa.pub | xclip"
+
