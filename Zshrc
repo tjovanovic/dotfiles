@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-  export ZSH=/home/tjovanovic/.oh-my-zsh
+  export ZSH=/home/$USER/.oh-my-zsh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -94,3 +94,6 @@ alias xmonadconfig="vim ~/.xmonad/xmonad.hs"
 
 alias sshclip="cat ~/.ssh/id_rsa.pub | xclip"
 
+alias screen="screen -h 5000"
+alias ra="screen -r"
+alias sls="screen -ls"
