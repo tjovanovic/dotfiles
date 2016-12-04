@@ -51,7 +51,7 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git, z)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -98,9 +98,14 @@ alias screen="screen -h 5000"
 alias ra="screen -r"
 alias sls="screen -ls"
 
+alias ipython="ipython --no-confirm-exit"
+alias g=git
+
 # MLP Shit
 alias jp="jupyter notebook --no-browser"
 alias mlp="source activate mlp"
 
 export PYTHONPATH=$HOME/uni.repos/mlpractical:$PYTHONPATH
 export MLP_DATA_DIR=$HOME/uni.repos/mlpractical/data
+
+
