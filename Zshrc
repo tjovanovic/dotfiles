@@ -88,6 +88,8 @@ export EDITOR=vim
 
 alias xclip="xclip -selection c"
 
+alias sl=ls
+
 alias zshconfig="vim ~/.zshrc"
 alias gitconfig="vim ~/.gitconfig"
 alias xmonadconfig="vim ~/.xmonad/xmonad.hs"
@@ -104,6 +106,10 @@ alias g=git
 # MLP Shit
 alias jp="jupyter notebook --no-browser"
 alias mlp="source activate mlp"
+
+function locate {
+	grep $1 ~/.database
+}
 
 export PYTHONPATH=$HOME/uni.repos/mlpractical:$PYTHONPATH
 export MLP_DATA_DIR=$HOME/uni.repos/mlpractical/data
