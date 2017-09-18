@@ -86,9 +86,6 @@ source $ZSH/oh-my-zsh.sh
 
 export EDITOR=vim
 
-alias pp="pacaur -Syu"
-alias p=pacaur
-
 alias xclip="xclip -selection c"
 
 alias sl=ls
@@ -106,11 +103,6 @@ alias sls="screen -ls"
 alias ipython="ipython --no-confirm-exit"
 alias g=git
 
-# MLP Shit
-alias jp="jupyter notebook --no-browser"
-alias mlp="source activate mlp"
-
-alias hons="workon hons"
 alias da=deactivate
 
 
@@ -122,23 +114,3 @@ function locate {
 export WORKON_HOME=~/.virtualenvs/envs
 export VIRTUALENVWRAPPER_HOOK_DIR=~/.virtualenvs/hooks
 source $HOME/.local/bin/virtualenvwrapper.sh
-
-export MLP_DATA_DIR=$HOME/git/mlp/data
-
-function afs {
-    if [ "$1" = "up" ]; then
-        sudo systemctl start openafs-client.service
-    elif [ "$1" = "down" ]; then
-        sudo systemctl stop openafs-client.service
-    fi
-}
-
-function nvid {
-    if [ "$1" = "up" ]; then
-        #sudo modprobe nvidia_drm
-        sudo modprobe nvidia_uvm
-        sudo modprobe bbswitch
-    elif [ "$1" = "down" ]; then
-        sudo modprobe -r nvidia_uvm nvidia_drm nvidia_modeset nvidia
-    fi
-}
