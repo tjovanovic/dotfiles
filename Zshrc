@@ -115,3 +115,6 @@ function locate {
 export WORKON_HOME=~/.virtualenvs/envs
 export VIRTUALENVWRAPPER_HOOK_DIR=~/.virtualenvs/hooks
 source $HOME/.local/bin/virtualenvwrapper.sh
+
+source /home/tomislavj/.nix-profile/etc/profile.d/nix.sh
+
