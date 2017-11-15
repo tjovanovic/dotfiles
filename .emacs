@@ -30,23 +30,50 @@
 ;; move this somewhere more useful...
 (global-set-key (kbd "M-p") 'helm-save-and-paste)
 
+
+(use-package rainbow-delimiters
+  :ensure t
+  :config
+  (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
+  )
+
 (use-package smart-tabs-mode
   :ensure t
   :config
-  (smart-tabs-insinuate 'python)
-  (smart-tabs-advice python-indent-line-1 python-indent)
+  (smart-tabs-insinuate 'python 'javascript)
   (add-hook 'python-mode-hook
     (lambda ()
+        (smart-tabs-advice python-indent-line-1 python-indent)
         (setq indent-tabs-mode t)
         (setq tab-width 4))
     )
+  (add-hook 'js2-mode-hook
+    (lambda ()
+        (smart-tabs-advice js2-indent-line js2-basic-offset)
+        (setq indent-tabs-mode t)
+        (setq tab-width 2))
+    )
   )
+
+(use-package js2-mode
+  :ensure t
+  :config
+  (setq js2-strict-missing-semi-warning nil)
+  (setq js2-missing-semi-one-line-override t)
+  )
+
+(use-package rjsx-mode
+  :ensure t
+  :config
+  (add-to-list 'auto-mode-alist '("\\.js\\'" . rjsx-mode))
+  )
+
 
 (use-package magit
   :ensure t
   :config
-  (setq
-   magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1))
+  (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
+  )
 
 
 (use-package better-defaults :ensure t)
@@ -54,7 +81,6 @@
 ;; custom keybindings
 (let ((map (make-sparse-keymap)))
   (define-key map "gs" 'magit-status)
-  (define-key map "mm" 'mu4e)
   (define-key map "/" 'helm-projectile-ag)
   (define-key map "bs" 'switch-to-scratch)
   ;; bind to Meta-Space
@@ -68,7 +94,6 @@
   (evil-leader/set-key
     ;; toggles
     "tt"  'whitespace-mode
-
     "q"   'delete-frame
     "bd"  'evil-delete-buffer
     "w"   'save-buffer
@@ -81,8 +106,10 @@
     "oo"  'other-frame
     "kb"  'kill-buffer
     "gs"  'magit-status
-    "/"   'helm-projectile-ag))
-
+    "/"   'helm-projectile-ag
+    ";"   'comment-dwim
+    )
+  )
 
 (use-package evil
   :ensure t
@@ -152,14 +179,15 @@
             (lambda ()
               (define-key yaml-mode-map "\C-m" 'newline-and-indent))))
 
+(use-package dockerfile-mode
+  :ensure t)
+
 (use-package nix-mode
   :no-require t)
 
 (use-package haskell-mode
   :no-require t)
 
-(use-package dockerfile-mode
-  :no-require t)
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
