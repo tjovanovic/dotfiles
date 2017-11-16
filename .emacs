@@ -27,6 +27,11 @@
   (kill-new (x-get-clipboard))
   (helm-show-kill-ring))
 
+(defun save-all-buffers ()
+  (interactive)
+  (save-some-buffers t)
+  )
+
 ;; move this somewhere more useful...
 (global-set-key (kbd "M-p") 'helm-save-and-paste)
 
@@ -53,6 +58,11 @@
         (setq indent-tabs-mode t)
         (setq tab-width 2))
     )
+  (add-hook 'css-mode-hook
+    (lambda ()
+        (setq indent-tabs-mode t)
+        (setq tab-width 4))
+    )
   )
 
 (use-package js2-mode
@@ -68,11 +78,21 @@
   (add-to-list 'auto-mode-alist '("\\.js\\'" . rjsx-mode))
   )
 
+(use-package flycheck
+  :ensure t
+  :config
+  ;; (add-hook 'after-init-hook 'global-flycheck-mode)
+  )
+
 
 (use-package magit
   :ensure t
   :config
   (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
+  )
+
+(use-package evil-magit
+  :ensure t
   )
 
 
@@ -86,6 +106,7 @@
   ;; bind to Meta-Space
   (define-key global-map (kbd "M-SPC") map))
 
+
 (use-package evil-leader
   :ensure t
   :config
@@ -97,6 +118,7 @@
     "q"   'delete-frame
     "bd"  'evil-delete-buffer
     "w"   'save-buffer
+    "W"   'save-all-buffers
     "TAB" 'mode-line-other-buffer
     "pb"  'helm-projectile-switch-to-buffer
     "pf"  'helm-projectile-find-file
@@ -153,7 +175,25 @@
 (use-package projectile
   :ensure t
   :config
-  (projectile-global-mode))
+  (projectile-mode))
+
+(use-package company
+  :ensure t
+  :config
+  (add-hook 'after-init-hook 'global-company-mode)
+  )
+
+(use-package jedi-core :ensure t)
+
+(use-package company-jedi
+  :ensure t
+  :config
+  (add-hook 'python-mode-hook
+    (lambda ()
+      (add-to-list 'company-backends 'company-jedi))
+    )
+  )
+
 
 ;; start the server
 ;; (server-start)

@@ -106,6 +106,8 @@ alias d=docker
 
 alias da=deactivate
 
+alias vim="emacsclient -nw -s /tmp/emacs1000/server"
+
 
 function locate {
 	grep $1 ~/.database
