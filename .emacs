@@ -212,6 +212,9 @@
   :init (setq markdown-command "multimarkdown"))
 
 
+(use-package org :ensure t)
+
+
 (use-package yaml-mode
   :ensure t
   :config
@@ -222,8 +225,7 @@
 (use-package dockerfile-mode
   :ensure t)
 
-(use-package nix-mode
-  :no-require t)
+(use-package nix-mode :ensure t)
 
 (use-package haskell-mode
   :no-require t)
