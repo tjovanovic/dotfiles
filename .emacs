@@ -35,6 +35,11 @@
 ;; move this somewhere more useful...
 (global-set-key (kbd "M-p") 'helm-save-and-paste)
 
+(add-hook 'java-mode-hook
+          (lambda ()
+            (setq c-basic-offset 2
+                  evil-shift-width 2
+            )))
 
 (use-package rainbow-delimiters
   :ensure t
@@ -77,6 +82,11 @@
   :config
   (add-to-list 'auto-mode-alist '("\\.js\\'" . rjsx-mode))
   )
+
+(use-package scala-mode
+  :ensure t
+  :interpreter
+  ("scala" . scala-mode))
 
 (use-package flycheck
   :ensure t
@@ -212,7 +222,10 @@
   :init (setq markdown-command "multimarkdown"))
 
 
-(use-package org :ensure t)
+(use-package org
+  :config
+    (setq org-agenda-files '("~/org/"))
+  :ensure t)
 
 
 (use-package yaml-mode
