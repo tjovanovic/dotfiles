@@ -242,18 +242,22 @@
 
 (use-package haskell-mode :ensure t)
 
-(use-package powerline-evil :ensure t)
+(use-package powerline-evil
+  :ensure t
+  :config
+  (defun powerline-minor-modes (a b) "") ;; hacky af
+  (defun powerline-selected-window-active () t))
 
 (use-package airline-themes
   :ensure t
   :config
-  (load-theme 'airline-ubaryd t))
+  (load-theme 'airline-ubaryd t)
+  (setq airline-shortened-directory-length 15)
+  (defun airline-shorten-directory (dir max-length) (sml/do-shorten-directory dir max-length))
+  )
 
 (use-package smart-mode-line :ensure t)
 
-(defun powerline-minor-modes (a b) "") ;; hacky af
-(setq airline-shortened-directory-length 15)
-(defun airline-shorten-directory (dir max-length) (sml/do-shorten-directory dir max-length))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
