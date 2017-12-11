@@ -240,8 +240,20 @@
 
 (use-package nix-mode :ensure t)
 
-(use-package haskell-mode
-  :no-require t)
+(use-package haskell-mode :ensure t)
+
+(use-package powerline-evil :ensure t)
+
+(use-package airline-themes
+  :ensure t
+  :config
+  (load-theme 'airline-ubaryd t))
+
+(use-package smart-mode-line :ensure t)
+
+(defun powerline-minor-modes (a b) "") ;; hacky af
+(setq airline-shortened-directory-length 15)
+(defun airline-shorten-directory (dir max-length) (sml/do-shorten-directory dir max-length))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -250,7 +262,7 @@
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    (quote
-    ("2a739405edf418b8581dcd176aaf695d319f99e3488224a3c495cb0f9fd814e3" default))))
+    ("3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "3eb93cd9a0da0f3e86b5d932ac0e3b5f0f50de7a0b805d4eb1f67782e9eb67a4" "946e871c780b159c4bb9f580537e5d2f7dba1411143194447604ecbaf01bd90c" "b59d7adea7873d58160d368d42828e7ac670340f11f36f67fa8071dbf957236a" "2a739405edf418b8581dcd176aaf695d319f99e3488224a3c495cb0f9fd814e3" default))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
