@@ -261,7 +261,12 @@
 (use-package org-bullets
   :ensure t
   :config
-  (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+  (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+  (set-face-attribute 'org-level-1 nil :height 1.2)
+  (set-face-attribute 'org-level-2 nil :height 1.1)
+  (set-face-attribute 'org-level-3 nil :height 1.0)
+  (setq org-bullets-bullet-list '("☯" "☢" "✸" "•"))
+  )
 
 
 (custom-set-variables
