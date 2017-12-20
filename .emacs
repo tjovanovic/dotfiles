@@ -17,6 +17,16 @@
 
 ;; custom functions & variables
 
+(defun minibuffer-keyboard-quit ()
+"Abort recursive edit.
+In Delete Selection mode, if the mark is active, just deactivate it;
+then it takes a second \\[keyboard-quit] to abort the minibuffer."
+  (interactive)
+  (if (and delete-selection-mode transient-mark-mode mark-active)
+      (setq deactivate-mark  t)
+      (when (get-buffer "*Completions*") (delete-windows-on "*Completions*"))
+      (abort-recursive-edit)))
+
 (defun switch-to-scratch ()
   (interactive)
   (switch-to-buffer "*scratch*"))
@@ -36,6 +46,12 @@
 (global-set-key (kbd "M-p") 'helm-save-and-paste)
 
 (add-hook 'java-mode-hook
+          (lambda ()
+            (setq c-basic-offset 2
+                  evil-shift-width 2
+            )))
+
+(add-hook 'emacs-lisp-mode-hook
           (lambda ()
             (setq c-basic-offset 2
                   evil-shift-width 2
@@ -134,6 +150,7 @@
     "pf"  'helm-projectile-find-file
     "pp"  'helm-projectile-switch-project
     "bb"  'helm-buffers-list
+    "f"   'helm-mini
     "bs"  'switch-to-scratch
     "oo"  'other-frame
     "kb"  'kill-buffer
@@ -146,6 +163,13 @@
 (use-package evil
   :ensure t
   :config
+  (define-key evil-normal-state-map [escape] 'keyboard-quit)
+  (define-key evil-visual-state-map [escape] 'keyboard-quit)
+  (define-key minibuffer-local-map [escape] 'minibuffer-keyboard-quit)
+  (define-key minibuffer-local-ns-map [escape] 'minibuffer-keyboard-quit)
+  (define-key minibuffer-local-completion-map [escape] 'minibuffer-keyboard-quit)
+  (define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
+  (define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
   (evil-mode 1))
 
 (use-package swiper
@@ -171,7 +195,9 @@
 (use-package helm
   :config
   (helm-mode)
-  (global-set-key (kbd "M-x") 'helm-M-x))
+  (global-set-key (kbd "M-x") 'helm-M-x)
+  (global-set-key (kbd "C-x C-f") 'helm-find-files)
+  (global-set-key (kbd "C-x C-r") 'helm-recentf))
 
 (use-package helm-ag
   :ensure t)
