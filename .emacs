@@ -57,6 +57,7 @@ prompt to name>."
     (comint-simple-send (get-buffer-process (current-buffer))
                       (concat "export PS1=\"\033[33m" name "\033[0m:\033[35m\\W\033[0m>\""))))
 
+
 ;; move this somewhere more useful...
 (global-set-key (kbd "C-c s") 'new-shell)
 (global-set-key (kbd "M-p") 'helm-save-and-paste)
@@ -77,8 +78,12 @@ prompt to name>."
                   evil-shift-width 2
                   )))
 
-(setq split-height-threshold nil)
-(setq split-width-threshold 0)
+(add-hook 'magit-mode-hook
+          (lambda ()
+            (save-all-buffers)))
+
+
+;; use display-buffer-alist instead of display-buffer-function if the following line won't work
 
 (use-package rainbow-delimiters
   :ensure t
