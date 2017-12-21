@@ -54,7 +54,7 @@ prompt to name>."
     (shell (current-buffer))
     (sleep-for 0 200)
     (delete-region (point-min) (point-max))
-    (comint-simple-send (get-buffer-process (current-buffer)) 
+    (comint-simple-send (get-buffer-process (current-buffer))
                       (concat "export PS1=\"\033[33m" name "\033[0m:\033[35m\\W\033[0m>\""))))
 
 ;; move this somewhere more useful...
@@ -75,7 +75,10 @@ prompt to name>."
           (lambda ()
             (setq c-basic-offset 2
                   evil-shift-width 2
-            )))
+                  )))
+
+(setq split-height-threshold nil)
+(setq split-width-threshold 0)
 
 (use-package rainbow-delimiters
   :ensure t
@@ -134,7 +137,6 @@ prompt to name>."
 (use-package magit
   :ensure t
   :config
-  (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
   )
 
 (use-package evil-magit
