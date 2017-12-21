@@ -42,8 +42,28 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
   (save-some-buffers t)
   )
 
+(defun new-shell (name)
+  "Opens a new shell buffer with the given name in
+asterisks (*name*) in the current directory with and changes the
+prompt to name>."
+  (interactive "sName: ")
+  (when (equal name "")
+    (setq name (file-name-base (directory-file-name default-directory))))
+  (pop-to-buffer (concat "<*" name "*>"))
+  (unless (eq major-mode 'shell-mode)
+    (shell (current-buffer))
+    (sleep-for 0 200)
+    (delete-region (point-min) (point-max))
+    (comint-simple-send (get-buffer-process (current-buffer)) 
+                      (concat "export PS1=\"\033[33m" name "\033[0m:\033[35m\\W\033[0m>\""))))
+
 ;; move this somewhere more useful...
+(global-set-key (kbd "C-c s") 'new-shell)
 (global-set-key (kbd "M-p") 'helm-save-and-paste)
+(global-set-key (kbd "C-c <left>")  'windmove-left)
+(global-set-key (kbd "C-c <right>") 'windmove-right)
+(global-set-key (kbd "C-c <up>")    'windmove-up)
+(global-set-key (kbd "C-c <down>")  'windmove-down)
 
 (add-hook 'java-mode-hook
           (lambda ()
@@ -197,7 +217,9 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
   (helm-mode)
   (global-set-key (kbd "M-x") 'helm-M-x)
   (global-set-key (kbd "C-x C-f") 'helm-find-files)
-  (global-set-key (kbd "C-x C-r") 'helm-recentf))
+  (global-set-key (kbd "C-x C-r") 'helm-recentf)
+  (define-key helm-map (kbd "<tab>") 'helm-next-line)
+  )
 
 (use-package helm-ag
   :ensure t)
@@ -294,7 +316,6 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
   (setq org-bullets-bullet-list '("☯" "☢" "✸" "•"))
   )
 
-
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -302,7 +323,10 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    (quote
-    ("3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "3eb93cd9a0da0f3e86b5d932ac0e3b5f0f50de7a0b805d4eb1f67782e9eb67a4" "946e871c780b159c4bb9f580537e5d2f7dba1411143194447604ecbaf01bd90c" "b59d7adea7873d58160d368d42828e7ac670340f11f36f67fa8071dbf957236a" "2a739405edf418b8581dcd176aaf695d319f99e3488224a3c495cb0f9fd814e3" default))))
+    ("3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "3eb93cd9a0da0f3e86b5d932ac0e3b5f0f50de7a0b805d4eb1f67782e9eb67a4" "946e871c780b159c4bb9f580537e5d2f7dba1411143194447604ecbaf01bd90c" "b59d7adea7873d58160d368d42828e7ac670340f11f36f67fa8071dbf957236a" "2a739405edf418b8581dcd176aaf695d319f99e3488224a3c495cb0f9fd814e3" default)))
+ '(package-selected-packages
+   (quote
+    (shell-here org-bullets company-jedi company flycheck zenburn-theme yaml-mode use-package swiper smart-tabs-mode smart-mode-line scpaste scala-mode rjsx-mode rainbow-delimiters powerline-evil paredit nix-mode markdown-mode jedi-core idle-highlight-mode helm-projectile helm-ag haskell-mode evil-magit evil-leader dockerfile-mode better-defaults airline-themes))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
