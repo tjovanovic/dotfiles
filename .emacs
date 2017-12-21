@@ -169,7 +169,7 @@ prompt to name>."
     ;; toggles
     "tt"  'whitespace-mode
     "q"   'delete-frame
-    "bd"  'evil-delete-buffer
+    "bd"  'kill-this-buffer
     "w"   'save-buffer
     "W"   'save-all-buffers
     "TAB" 'mode-line-other-buffer
@@ -307,7 +307,8 @@ prompt to name>."
   :ensure t
   :config
   (defun powerline-minor-modes (a b) "") ;; hacky af
-  (defun powerline-selected-window-active () t))
+  ;; (defun powerline-selected-window-active () t)
+  )
 
 (use-package airline-themes
   :ensure t
