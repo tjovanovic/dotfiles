@@ -343,10 +343,8 @@ prompt to name>."
          (:name "Zeppelin Gambit"
           :local-port 3232
           :host "zeppelin.zeppelin.svc.k2.gambit"
-          :remote-port 8080
-          :login "thecode.gambit"))
-      )
-  )
+          :remote-port 80
+          :login "thecode.gambit"))))
 
 (use-package org-bullets
   :ensure t
