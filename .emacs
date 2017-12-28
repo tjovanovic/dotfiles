@@ -11,7 +11,8 @@
 
 ;; non-specific functionality
 (setq vc-follow-symlinks t)
-
+(add-to-list 'default-frame-alist
+                       '(font . "DejaVu Sans Mono-10"))
 
 (use-package zenburn-theme :ensure t)
 
@@ -65,6 +66,11 @@ prompt to name>."
 (global-set-key (kbd "C-c <right>") 'windmove-right)
 (global-set-key (kbd "C-c <up>")    'windmove-up)
 (global-set-key (kbd "C-c <down>")  'windmove-down)
+
+(add-hook 'org-shiftup-final-hook 'windmove-up)
+(add-hook 'org-shiftleft-final-hook 'windmove-left)
+(add-hook 'org-shiftdown-final-hook 'windmove-down)
+(add-hook 'org-shiftright-final-hook 'windmove-right)
 
 (add-hook 'java-mode-hook
           (lambda ()
@@ -184,6 +190,8 @@ prompt to name>."
     "gs"  'magit-status
     "/"   'helm-projectile-ag
     ";"   'comment-dwim
+    "ss"  'ssh-tunnels
+    "ks"  'kubernetes-overview
     )
   )
 
@@ -198,6 +206,9 @@ prompt to name>."
   (define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
   (define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
   (global-set-key [escape] 'keyboard-quit)
+  (evil-set-initial-state 'ssh-tunnels-mode 'emacs)
+  (evil-set-initial-state 'haskell-error-mode 'emacs)
+  (evil-set-initial-state 'term-mode 'emacs)
   (evil-mode 1))
 
 ;; (use-package swiper
@@ -304,12 +315,6 @@ prompt to name>."
 
 (use-package haskell-mode :ensure t)
 
-
-(add-hook 'haskell-error-mode-hook
-          (lambda ()
-            (evil-emacs-state 1)
-          ))
-
 (use-package powerline-evil
   :ensure t
   :config
@@ -327,15 +332,38 @@ prompt to name>."
 
 (use-package smart-mode-line :ensure t)
 
+(use-package ssh-tunnels
+  :ensure t
+  :config
+  (setq ssh-tunnels-configurations
+      '((:name "HDFS Gambit"
+         :local-port 5102
+         :remote-port 50070
+         :login "archive1-pm.gambit")
+         (:name "Zeppelin Gambit"
+          :local-port 3232
+          :host "zeppelin.zeppelin.svc.k2.gambit"
+          :remote-port 8080
+          :login "thecode.gambit"))
+      )
+  )
+
 (use-package org-bullets
   :ensure t
   :config
   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
-  (set-face-attribute 'org-level-1 nil :height 1.2)
-  (set-face-attribute 'org-level-2 nil :height 1.1)
-  (set-face-attribute 'org-level-3 nil :height 1.0)
+  (set-face-attribute 'org-level-1 nil :height 1.4)
+  (set-face-attribute 'org-level-2 nil :height 1.3)
+  (set-face-attribute 'org-level-3 nil :height 1.2)
   (setq org-bullets-bullet-list '("☯" "☢" "✸" "•"))
   )
+
+(use-package kubernetes
+  :ensure t
+  :commands (kubernetes-overview)
+  )
+
+(use-package kubernetes-evil :ensure t)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -347,7 +375,7 @@ prompt to name>."
     ("3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "3eb93cd9a0da0f3e86b5d932ac0e3b5f0f50de7a0b805d4eb1f67782e9eb67a4" "946e871c780b159c4bb9f580537e5d2f7dba1411143194447604ecbaf01bd90c" "b59d7adea7873d58160d368d42828e7ac670340f11f36f67fa8071dbf957236a" "2a739405edf418b8581dcd176aaf695d319f99e3488224a3c495cb0f9fd814e3" default)))
  '(package-selected-packages
    (quote
-    (nix-sandbox ssh-tunnels helm-swoop shell-here org-bullets company-jedi company flycheck zenburn-theme yaml-mode use-package swiper smart-tabs-mode smart-mode-line scpaste scala-mode rjsx-mode rainbow-delimiters powerline-evil paredit nix-mode markdown-mode jedi-core idle-highlight-mode helm-projectile helm-ag haskell-mode evil-magit evil-leader dockerfile-mode better-defaults airline-themes))))
+    (kubernetes-evil kubernetes nix-sandbox ssh-tunnels helm-swoop shell-here org-bullets company-jedi company flycheck zenburn-theme yaml-mode use-package swiper smart-tabs-mode smart-mode-line scpaste scala-mode rjsx-mode rainbow-delimiters powerline-evil paredit nix-mode markdown-mode jedi-core idle-highlight-mode helm-projectile helm-ag haskell-mode evil-magit evil-leader dockerfile-mode better-defaults airline-themes))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
