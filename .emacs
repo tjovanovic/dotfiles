@@ -11,8 +11,8 @@
 
 ;; non-specific functionality
 (setq vc-follow-symlinks t)
-(add-to-list 'default-frame-alist
-                       '(font . "DejaVu Sans Mono-10"))
+;; (add-to-list 'default-frame-alist
+;;                        '(font . "DejaVu Sans Mono-10"))
 
 (use-package zenburn-theme :ensure t)
 
@@ -58,6 +58,8 @@ prompt to name>."
     (comint-simple-send (get-buffer-process (current-buffer))
                       (concat "export PS1=\"\033[33m" name "\033[0m:\033[35m\\W\033[0m>\""))))
 
+(setenv "IPY_TEST_SIMPLE_PROMPT" "1")
+(setq python-shell-interpreter "ipython")
 
 ;; move this somewhere more useful...
 (global-set-key (kbd "C-c s") 'new-shell)
@@ -313,7 +315,21 @@ prompt to name>."
 
 (use-package nix-mode :ensure t)
 
-(use-package haskell-mode :ensure t)
+(defun my-haskell-interactive-switch ()
+  (save-buffer)
+  (haskell-interactive-switch)
+  )
+
+(use-package haskell-mode
+  :ensure t
+  :config
+  (add-hook 'haskell-mode-hook
+            (lambda ()
+              (interactive-haskell-mode)
+            )
+  )
+
+(define-key interactive-haskell-mode-map "C-c C-z" 'my-haskell-interactive-switch))
 
 (use-package powerline-evil
   :ensure t
