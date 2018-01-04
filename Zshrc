@@ -112,3 +112,10 @@ alias vim="emacsclient -nw -s /tmp/emacs1000/server"
 function locate {
 	grep $1 ~/.database
 }
+
+
+export WORKON_HOME=~/.virtualenvs/envs
+export VIRTUALENVWRAPPER_HOOK_DIR=~/.virtualenvs/hooks
+source $HOME/.local/bin/virtualenvwrapper.sh
+
+source /home/tomislavj/.nix-profile/etc/profile.d/nix.sh
