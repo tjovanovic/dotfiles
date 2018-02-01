@@ -12,9 +12,11 @@
 ;; non-specific functionality
 (setq vc-follow-symlinks t)
 (add-to-list 'default-frame-alist
-                       '(font . "DejaVu Sans Mono-10"))
+                       '(font . "DejaVu Sans Mono-12"))
 
 (use-package zenburn-theme :ensure t)
+
+(use-package erlang :ensure t)
 
 ;; custom functions & variables
 
@@ -73,10 +75,10 @@ prompt to name>."
 (winner-mode)
 (defvar my-keys-minor-mode-map
   (let ((map (make-sparse-keymap)))
-    (define-key map (kbd "C-c <left>")  'windmove-left)
-    (define-key map (kbd "C-c <right>") 'windmove-right)
-    (define-key map (kbd "C-c <up>")    'windmove-up)
-    (define-key map (kbd "C-c <down>")  'windmove-down)
+    (define-key map (kbd "C-w <left>")  'windmove-left)
+    (define-key map (kbd "C-w <right>") 'windmove-right)
+    (define-key map (kbd "C-w <up>")    'windmove-up)
+    (define-key map (kbd "C-w <down>")  'windmove-down)
     map)
   "my-keys-minor-mode keymap.")
 
@@ -122,21 +124,21 @@ prompt to name>."
         (setq indent-tabs-mode t)
         (setq tab-width 4))
     )
+
   (add-hook 'js2-mode-hook
     (lambda ()
         (smart-tabs-advice js2-indent-line js2-basic-offset)
         (setq indent-tabs-mode t)
         (setq tab-width 2))
     )
+
   (add-hook 'rsjx-mode-hook
     (lambda ()
-        (smart-tabs-advice rjsx-indent-line js2-basic-offset)
         (setq c-basic-offset 2
               indent-tabs-mode t
               tab-width 2
-              evil-shift-width 2
-              js2-basic-offset 2
-							)
+              evil-shift-width 2)))
+
   (add-hook 'css-mode-hook
     (lambda ()
         (setq indent-tabs-mode t)
@@ -383,9 +385,9 @@ prompt to name>."
             (lambda ()
               (interactive-haskell-mode)
             )
-  )
+  ))
 
-(define-key interactive-haskell-mode-map "C-c C-z" 'my-haskell-interactive-switch))
+;; (define-key interactive-haskell-mode-map "C-c C-z" 'my-haskell-interactive-switch))
 
 (use-package powerline-evil
   :ensure t
@@ -446,7 +448,7 @@ prompt to name>."
  '(org-trello-current-prefix-keybinding "C-c o" nil (org-trello))
  '(package-selected-packages
    (quote
-    (multi-term pyvenv anaconda-mode org-trello itail json-mode kubernetes-evil kubernetes nix-sandbox ssh-tunnels helm-swoop shell-here org-bullets company flycheck zenburn-theme yaml-mode use-package swiper smart-tabs-mode smart-mode-line scpaste scala-mode rjsx-mode rainbow-delimiters powerline-evil paredit nix-mode markdown-mode idle-highlight-mode helm-projectile helm-ag haskell-mode evil-magit evil-leader dockerfile-mode better-defaults airline-themes))))
+    (erlang erlang-mode multi-term pyvenv anaconda-mode org-trello itail json-mode kubernetes-evil kubernetes nix-sandbox ssh-tunnels helm-swoop shell-here org-bullets company flycheck zenburn-theme yaml-mode use-package swiper smart-tabs-mode smart-mode-line scpaste scala-mode rjsx-mode rainbow-delimiters powerline-evil paredit nix-mode markdown-mode idle-highlight-mode helm-projectile helm-ag haskell-mode evil-magit evil-leader dockerfile-mode better-defaults airline-themes))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
