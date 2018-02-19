@@ -14,6 +14,19 @@
 (add-to-list 'default-frame-alist
                        '(font . "DejaVu Sans Mono-12"))
 
+
+(defun x  ()
+  ":)."
+  (let ((symbols '(("lambda" . 955)
+                  ("forall" . 8704)
+                  ("->" . 8594)
+                )
+              ))
+    (setq prettify-symbols-alist symbols)))
+
+(global-prettify-symbols-mode 1)
+
+
 (use-package zenburn-theme :ensure t)
 
 (use-package erlang :ensure t)
@@ -22,9 +35,9 @@
 
 (defun minibuffer-keyboard-quit ()
 "Abort recursive edit.
-In Delete Selection mode, if the mark is active, just deactivate it;
-then it takes a second \\[keyboard-quit] to abort the minibuffer."
-  (interactive)
+In Delete Selection mode, if the mark is active, just deactivate 
+then it takes a second \\[keyboard-quit] to abort the ."
+  (interactive
   (if (and delete-selection-mode transient-mark-mode mark-active)
       (setq deactivate-mark  t)
       (when (get-buffer "*Completions*") (delete-windows-on "*Completions*"))
@@ -132,10 +145,22 @@ prompt to name>."
         (setq tab-width 2))
     )
 
-  (add-hook 'rsjx-mode-hook
+  (add-hook 'rjsx-mode-hook
     (lambda ()
         (setq c-basic-offset 2
-              indent-tabs-mode t
+              ;; indent-tabs-mode t
+              indent-tabs-mode nil
+              js2-basic-offset 2
+              tab-width 2
+              evil-shift-width 2)))
+
+  (add-hook 'web-mode-hook
+    (lambda ()
+        (setq c-basic-offset 2
+              ;; indent-tabs-mode t
+              indent-tabs-mode nil
+              web-mode-markup-indent-offset 2
+              web-mode-code-indent-offset 2
               tab-width 2
               evil-shift-width 2)))
 
@@ -448,7 +473,7 @@ prompt to name>."
  '(org-trello-current-prefix-keybinding "C-c o" nil (org-trello))
  '(package-selected-packages
    (quote
-    (erlang erlang-mode multi-term pyvenv anaconda-mode org-trello itail json-mode kubernetes-evil kubernetes nix-sandbox ssh-tunnels helm-swoop shell-here org-bullets company flycheck zenburn-theme yaml-mode use-package swiper smart-tabs-mode smart-mode-line scpaste scala-mode rjsx-mode rainbow-delimiters powerline-evil paredit nix-mode markdown-mode idle-highlight-mode helm-projectile helm-ag haskell-mode evil-magit evil-leader dockerfile-mode better-defaults airline-themes))))
+    (pretty-mode editorconfig web-mode flow-minor-mode flycheck-mypy erlang erlang-mode multi-term pyvenv anaconda-mode org-trello itail json-mode kubernetes-evil kubernetes nix-sandbox ssh-tunnels helm-swoop shell-here org-bullets company flycheck zenburn-theme yaml-mode use-package swiper smart-tabs-mode smart-mode-line scpaste scala-mode rjsx-mode rainbow-delimiters powerline-evil paredit nix-mode markdown-mode idle-highlight-mode helm-projectile helm-ag haskell-mode evil-magit evil-leader dockerfile-mode better-defaults airline-themes))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
