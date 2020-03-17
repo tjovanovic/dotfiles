@@ -103,6 +103,8 @@ alias sls="screen -ls"
 alias ipython="ipython --no-confirm-exit"
 alias g=git
 alias d=docker
+alias dc=docker-compose
+alias k=kubectl
 
 alias da=deactivate
 
@@ -118,6 +120,4 @@ export WORKON_HOME=~/.virtualenvs/envs
 export VIRTUALENVWRAPPER_HOOK_DIR=~/.virtualenvs/hooks
 source $HOME/.local/bin/virtualenvwrapper.sh
 
-source /home/tomislavj/.nix-profile/etc/profile.d/nix.sh
-
-export PATH=~/git/gambit/core/bin:$PATH
+export PATH=/home/tjovanovic/.poetry/bin:~/.bin:~/git/gambit/core/bin:$PATH

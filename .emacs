@@ -14,15 +14,18 @@
 (add-to-list 'default-frame-alist
                        '(font . "DejaVu Sans Mono-12"))
 
-
-(defun x  ()
+(defun x ()
   ":)."
   (let ((symbols '(("lambda" . 955)
                   ("forall" . 8704)
                   ("->" . 8594)
+                  ("=>" . 8658)
                 )
               ))
     (setq prettify-symbols-alist symbols)))
+
+
+(add-hook 'global-prettify-symbols-mode-hook 'x)
 
 (global-prettify-symbols-mode 1)
 
@@ -41,7 +44,7 @@ then it takes a second \\[keyboard-quit] to abort the ."
   (if (and delete-selection-mode transient-mark-mode mark-active)
       (setq deactivate-mark  t)
       (when (get-buffer "*Completions*") (delete-windows-on "*Completions*"))
-      (abort-recursive-edit)))
+      (abort-recursive-edit))))
 
 (defun switch-to-scratch ()
   (interactive)
@@ -473,7 +476,7 @@ prompt to name>."
  '(org-trello-current-prefix-keybinding "C-c o" nil (org-trello))
  '(package-selected-packages
    (quote
-    (pretty-mode editorconfig web-mode flow-minor-mode flycheck-mypy erlang erlang-mode multi-term pyvenv anaconda-mode org-trello itail json-mode kubernetes-evil kubernetes nix-sandbox ssh-tunnels helm-swoop shell-here org-bullets company flycheck zenburn-theme yaml-mode use-package swiper smart-tabs-mode smart-mode-line scpaste scala-mode rjsx-mode rainbow-delimiters powerline-evil paredit nix-mode markdown-mode idle-highlight-mode helm-projectile helm-ag haskell-mode evil-magit evil-leader dockerfile-mode better-defaults airline-themes))))
+    (editorconfig web-mode flow-minor-mode flycheck-mypy erlang erlang-mode multi-term pyvenv anaconda-mode org-trello itail json-mode kubernetes-evil kubernetes nix-sandbox ssh-tunnels helm-swoop shell-here org-bullets company flycheck zenburn-theme yaml-mode use-package swiper smart-tabs-mode smart-mode-line scpaste scala-mode rjsx-mode rainbow-delimiters powerline-evil paredit nix-mode markdown-mode idle-highlight-mode helm-projectile helm-ag haskell-mode evil-magit evil-leader dockerfile-mode better-defaults airline-themes))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
