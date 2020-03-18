@@ -107,6 +107,7 @@ alias g=git
 alias d=docker
 alias dc=docker-compose
 alias k=kubectl
+alias tf=terraform
 
 alias da=deactivate
 
