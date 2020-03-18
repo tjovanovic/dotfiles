@@ -84,7 +84,9 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-export EDITOR="emacsclient -t -s /tmp/emacs1000/server"
+# export EDITOR="emacsclient -t -s /tmp/emacs1000/server"
+export EDITOR="vim"
+
 
 alias xclip="xclip -selection c"
 
@@ -108,16 +110,4 @@ alias k=kubectl
 
 alias da=deactivate
 
-alias vim="emacsclient -nw -s /tmp/emacs1000/server"
-
-
-function locate {
-	grep $1 ~/.database
-}
-
-
-export WORKON_HOME=~/.virtualenvs/envs
-export VIRTUALENVWRAPPER_HOOK_DIR=~/.virtualenvs/hooks
-source $HOME/.local/bin/virtualenvwrapper.sh
-
-export PATH=/home/tjovanovic/.poetry/bin:~/.bin:~/git/gambit/core/bin:$PATH
+# alias vim="emacsclient -nw -s /tmp/emacs1000/server"
