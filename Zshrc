@@ -84,8 +84,7 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# export EDITOR="emacsclient -t -s /tmp/emacs1000/server"
-export EDITOR="vim"
+export EDITOR="emacsclient -t -s /tmp/emacs1000/server"
 
 
 alias xclip="xclip -selection c"
@@ -111,4 +110,4 @@ alias tf=terraform
 
 alias da=deactivate
 
-# alias vim="emacsclient -nw -s /tmp/emacs1000/server"
+alias vim="emacsclient -nw -s /tmp/emacs1000/server"
