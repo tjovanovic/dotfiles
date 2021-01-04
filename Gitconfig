@@ -26,3 +26,5 @@
         hidden = !git ls-files -v | grep "^[[:lower:]]"
 [core]
 	excludesfile = /home/tomislavj/.gitignore_global
+[pull]
+	rebase = true

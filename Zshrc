@@ -84,7 +84,9 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-export EDITOR="emacsclient -t -s /tmp/emacs1000/server"
+export EDITOR="emacsclient -nw -a ''"
+export PATH=/home/tjovanovic/go/bin:$PATH
+export KUBECTL_EXTERNAL_DIFF=colordiff
 
 
 alias xclip="xclip -selection c"
@@ -107,7 +109,11 @@ alias d=docker
 alias dc=docker-compose
 alias k=kubectl
 alias tf=terraform
+alias tg=terragrunt
+
+alias s=skaffold
+alias m=minikube
 
 alias da=deactivate
 
-alias vim="emacsclient -nw -s /tmp/emacs1000/server"
+alias vim="emacsclient -nw -a ''"
